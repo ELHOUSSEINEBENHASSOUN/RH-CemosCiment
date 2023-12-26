@@ -1,0 +1,159 @@
+{% extends "layouts/master.html" %}
+{% block title %} Heures Supplémentaires {% endblock %}
+{% block body %}
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Heures Supplémentaires</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Accueille</a></li>
+          <li class="breadcrumb-item active">Heures Supplémentaires</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+  
+  
+        <div class="col-lg-12">
+  
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Demander un heure supplementaire</h5>
+              {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+              {% endif %}
+          
+          
+              
+              <!-- General Form Elements -->
+              <form action="{% url 'heuresupplementaire' %}" method="post" enctype="multipart/form-data" novalidate class="needs-validation">
+                {% csrf_token %}
+                
+                <!-- Date Debut HS Field -->
+                <div class="row mb-3">
+                    <label for="DateDebutHS" class="col-sm-2 col-form-label">Date de début HS</label>
+                    <div class="col-sm-10">
+                        <input type="date" class="form-control" name="DateDebut" id="DateDebut" required onchange="adjustDateFin()">
+                        <div class="invalid-feedback">Veuillez fournir une date de début HS.</div>
+                    </div>
+                </div>
+            
+                <!-- Heure Debut Field -->
+                <div class="row mb-3">
+                    <label for="HDebut" class="col-sm-2 col-form-label">Heure de début</label>
+                    <div class="col-sm-10">
+                        <input type="time" class="form-control" name="HDebut" id="HDebut" required>
+                        <div class="invalid-feedback">Veuillez fournir une heure de début.</div>
+                    </div>
+                </div>
+            
+                <!-- Date Fin Field -->
+                <div class="row mb-3">
+                    <label for="DateFin" class="col-sm-2 col-form-label">Date de fin</label>
+                    <div class="col-sm-10">
+                      <input type="date" class="form-control" name="DateFin" id="DateFin" required>
+                      <div class="invalid-feedback">Veuillez fournir une date de fin.</div>
+                    </div>
+                </div>
+            
+                <!-- Heure Fin Field -->
+                <div class="row mb-3">
+                    <label for="HFin" class="col-sm-2 col-form-label">Heure de fin</label>
+                    <div class="col-sm-10">
+                        <input type="time" class="form-control" name="HFin" id="HFin" required>
+                        <div class="invalid-feedback">Veuillez fournir une heure de fin.</div>
+                    </div>
+                </div>
+            
+                <!-- Taux Horaire Field -->
+                <div class="row mb-3">
+                    <label for="TauxHoraire" class="col-sm-2 col-form-label">Taux Horaire</label>
+                    <div class="col-sm-10">
+                        <input type="number" step="0.01" class="form-control" name="TauxHoraire" id="TauxHoraire" required>
+                        <div class="invalid-feedback">Veuillez fournir un taux horaire.</div>
+                    </div>
+                </div>
+            
+                <!-- Agent Field -->
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label">Agents</label>
+                  <div class="col-sm-10">
+                      <div class="input-group has-validation">
+                          <select class="form-select" aria-label="Default select example" name="IdPersonnelCreePour" required>
+                              <option value="" selected disabled>Séléctionner votre Agent</option>
+                              {% for agent in agents %}
+                                  <option value="{{ agent.IdPersonnel }}">{{ agent.Matricule }} - {{ agent.Nom }} {{ agent.Prenom }}</option>
+                              {% empty %}
+                                  <option disabled>Aucun Agent disponible</option>
+                              {% endfor %}
+                          </select>
+                          <div class="invalid-feedback">Veuillez sélectionner votre Agent.</div>
+                      </div>
+                  </div>
+                </div>
+
+
+            
+                <!-- Commentaire Field -->
+                <div class="row mb-3">
+                    <label for="Commentaire" class="col-sm-2 col-form-label">Commentaire</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" style="height: 100px" name="Commentaire" id="Commentaire" required></textarea>
+                        <div class="invalid-feedback">Veuillez fournir un commentaire.</div>
+                    </div>
+                </div>
+            
+                <div class="text-center">
+                    <button type="submit" class="btn">Demander</button>
+                </div>
+            </form>
+            <!-- End General Form Elements -->
+  
+            </div>
+          </div>
+  
+        </div>
+  
+      </div>
+    </section>
+  </main><!-- End #main -->
+
+<script>
+  
+  // Existing script you provided
+  function adjustDateFin() {
+      const dateDebut = document.getElementById("DateDebut").value;
+      const dateFin = document.getElementById("DateFin");
+
+      dateFin.min = dateDebut;
+      if (dateFin.value < dateDebut || !dateFin.value) {
+          dateFin.value = dateDebut;
+      }
+  }
+
+      // Function to close alert messages after a delay
+      function closeAlerts() {
+        const alerts = document.querySelectorAll('.alert');
+        if (alerts) {
+            alerts.forEach((alert) => {
+                setTimeout(function () {
+                    alert.style.display = 'none';
+                }, 3000); // 3000 milliseconds = 3 seconds
+            });
+        }
+    }
+
+    // Call the closeAlerts function when the page loads
+    window.addEventListener('load', closeAlerts);
+</script>
+
+
+{% endblock %}

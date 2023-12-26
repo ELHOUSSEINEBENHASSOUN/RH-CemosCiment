@@ -1,0 +1,97 @@
+{% extends "layouts/master.html" %}
+{% block title %} Contact {% endblock %}
+{% block body %}
+   <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Contact</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Accueille</a></li>
+          <li class="breadcrumb-item active">Contact</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section contact">
+
+      <div class="row gy-4">
+
+        <div class="col-xl-6">
+
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="info-box card">
+                <i class="bi bi-geo-alt"></i>
+                <h3>Adresse</h3>
+                <p>320 Av Makkah,<br>Lâayoune, Maroc</p>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="info-box card">
+                <i class="bi bi-telephone"></i>
+                <h3>Appelez-nous</h3>
+                <p>+(212) 528 980 437<br>+(212) 528 980 437</p>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="info-box card">
+                <i class="bi bi-envelope"></i>
+                <h3>Contactez-nous</h3>
+                <p>info@CemosCiment.ma<br>rh@CemosCiment.ma</p>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="info-box card">
+                <i class="bi bi-clock"></i>
+                <h3>Heures d'ouverture</h3>
+                <p>Lundi - Vendredi<br>9:00AM - 17:00AM</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-xl-6">
+          <div class="card p-4">
+
+            
+            <form action="{% url 'contact' %}" method="post" class="needs-validation" novalidate>
+              {% csrf_token %}
+              <div class="row gy-4">
+             
+                <div class="col-md-12">
+                  <input type="text" class="form-control" name="sujet" placeholder="Sujet" required>
+                  <div class="invalid-feedback">
+                    Veuillez entrer un sujet.
+                  </div>
+                </div>
+            
+                <div class="col-md-12">
+                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+                  <div class="invalid-feedback">
+                    Veuillez entrer un message.
+                  </div>
+                </div>
+            
+                <div class="col-md-12 text-center">
+                  <button type="submit" class="btn">Envoyer le message</button>
+                </div>
+              </div>
+            </form>
+            
+            
+            
+          </div>
+        </div>
+
+
+      </div>
+
+
+
+      </div>
+      </div>
+    </section>
+   </main><!-- End #main -->
+{% endblock %}

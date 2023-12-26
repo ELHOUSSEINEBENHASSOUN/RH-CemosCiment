@@ -1,0 +1,74 @@
+{% extends "layouts/master.html" %}
+{% block title %} Attestation {% endblock %}
+{% block body %}
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Attestation</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Accueille</a></li>
+          <li class="breadcrumb-item active">Attestation</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+      <div class="row">
+  
+  
+        <div class="col-lg-12">
+  
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Demander une attestation</h5>
+                  {% if messages %}
+                      {% for message in messages %}
+                          <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                              {{ message }}
+                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>
+                      {% endfor %}
+                  {% endif %}
+          
+              
+              <!-- General Form Elements -->
+              <form action="{% url 'attestation' %}" method="post" enctype="multipart/form-data" novalidate class="needs-validation">
+  
+                {% csrf_token %}
+  
+                <!-- Type D'attestation Field -->
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label">Type D'attestation</label>
+                  <div class="col-sm-10">
+                      <div class="input-group has-validation">
+                          <select class="form-select" aria-label="Default select example" name="DescriptionAttestation" required>
+                              <option value="" selected disabled>Séléctionner votre type D'attestation</option>
+                              {% for type in all_types %}
+                                  <option value="{{ type.IdTypeAttestation }}">{{ type.DescriptionAttestation }}</option>
+                              {% empty %}
+                                  <option disabled>Aucun type disponible</option>
+                              {% endfor %}
+                          </select>
+                          <div class="invalid-feedback">Veuillez sélectionner un type d'attestation.</div>
+                      </div>
+                  </div>
+                </div>
+    
+                <div class="text-center">
+                  <button type="submit" class="btn">Demander</button>
+                </div>
+              
+  
+  
+              </form><!-- End General Form Elements -->
+  
+            </div>
+          </div>
+  
+        </div>
+  
+      </div>
+    </section>
+  </main><!-- End #main -->
+{% endblock %}

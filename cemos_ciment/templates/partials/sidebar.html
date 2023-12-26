@@ -1,0 +1,181 @@
+{% load static %}
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'dashboard' %}">
+          <i class="bi bi-grid"></i>
+          <span>Accueil</span>
+        </a>
+      </li><!-- End Accueille Nav -->
+
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#Pointage-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-arrow-left-right"></i><span>Gestion pointage</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="Pointage-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="#">
+              <i class="bi bi-circle"></i><span>Ajouter un pointage</span>
+            </a>
+          </li>
+        </ul>
+        <ul id="Pointage-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="#">
+              <i class="bi bi-circle"></i><span>Consulter Mes pointage</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Gestion des Pointage Nav -->
+
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#absence-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-briefcase"></i><span>Gestion absences</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="absence-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{% url 'absence' %}">
+              <i class="bi bi-circle"></i><span>Demande Absences</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Gestion des absences Nav -->
+
+      {% if user.IdRole.NameRole == 'chef' %}
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#heuresupplémentaire-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-clock"></i><span>Gestion heures supplémentaires</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="heuresupplémentaire-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{% url 'heuresupplementaire' %}">
+              <i class="bi bi-circle"></i><span>Demande Heures supplémentaires</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Gestion heures supplémentaires Nav -->
+      {% endif %}
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#Attestation-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-file-earmark-text"></i><span>Gestion attestation</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="Attestation-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{% url 'attestation' %}">
+              <i class="bi bi-circle"></i><span>Demande Attestation</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Attestation Nav -->
+
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#Paie-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-cash-coin"></i><span>Bulletins de paie</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="Paie-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="#">
+              <i class="bi bi-circle"></i><span>Ajouter un paie</span>
+            </a>
+          </li>
+        </ul>
+        <ul id="Paie-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="#">
+              <i class="bi bi-circle"></i><span>Consulter Mes paie</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Bulletins de paie Nav -->
+
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#formation-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Gestion formation</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="formation-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="#">
+              <i class="bi bi-circle"></i><span>Ajouter un formation</span>
+            </a>
+          </li>
+        </ul>
+        <ul id="formation-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="#">
+              <i class="bi bi-circle"></i><span>Consulter Mes formation</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Gestion des formations Nav -->
+
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#Évaluation-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-bar-chart-steps"></i><span>Gestion évaluation</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="Évaluation-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="#">
+              <i class="bi bi-circle"></i><span>Ajouter un évaluation</span>
+            </a>
+          </li>
+        </ul>
+        <ul id="Évaluation-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="#">
+              <i class="bi bi-circle"></i><span>Consulter Mes évaluation</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Gestion de l’évaluation Nav -->
+
+
+      <li class="nav-heading">Administration</li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#Événement-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-calendar-check"></i><span>Plan de roulement</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="Événement-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{% url 'evenement' %}">
+              <i class="bi bi-circle"></i><span>Calendrier de travail </span>
+            </a>
+          </li>
+        </ul>
+        <ul id="Événement-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{% url 'evenement' %}">
+              <i class="bi bi-circle"></i><span>Taches</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Événement de calendrier Nav -->
+      
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#">
+          <i class="bi bi-person"></i>
+          <span>Gestion stagiaire</span>
+        </a>
+      </li><!-- End Stagiaire Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'users' %}">
+          <i class="bi bi-people"></i>
+          <span>Utilisateurs</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+
+    </ul>
+
+  </aside><!-- End Sidebar-->

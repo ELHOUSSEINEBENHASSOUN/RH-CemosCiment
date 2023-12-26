@@ -1,0 +1,194 @@
+{% extends "layouts/master.html" %}
+{% block title %} Absence {% endblock %}
+{% block body %}
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Absence</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Accueille</a></li>
+        <li class="breadcrumb-item active">Absence</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+
+
+      <div class="col-lg-12">
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Demande D'absence</h5>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+        
+            
+            <!-- General Form Elements -->
+            <form action="{% url 'absence' %}" method="post" enctype="multipart/form-data" novalidate class="needs-validation">
+
+              {% csrf_token %}
+
+              <!-- Date Debut Field -->
+              <div class="row mb-3">
+                <label for="DateDebut" class="col-sm-2 col-form-label">Date debut</label>
+                <div class="col-sm-10">
+                    <div class="input-group has-validation">
+                        <input type="date" class="form-control" name="DateDebut" id="DateDebut" required onchange="adjustDateFin()">
+                        <div class="invalid-feedback">Veuillez fournir une date de début.</div>
+                    </div>
+                </div>
+              </div>
+
+              <!-- Date Fin Field -->
+              <div class="row mb-3">
+                <label for="DateFin" class="col-sm-2 col-form-label">Date fin</label>
+                <div class="col-sm-10">
+                    <div class="input-group has-validation">
+                        <input type="date" class="form-control" name="DateFin" id="DateFin" required>
+                        <div class="invalid-feedback">Veuillez fournir une date de fin.</div>
+                    </div>
+                </div>
+              </div>
+
+              <!-- Motif D'absence Field -->
+              <div class="row mb-3">
+                <label for="MotifAbsence" class="col-sm-2 col-form-label">Motif D'absence</label>
+                <div class="col-sm-10">
+                    <div class="input-group has-validation">
+                        <textarea class="form-control" style="height: 100px" name="MotifAbsence" required></textarea>
+                        <div class="invalid-feedback">Veuillez fournir un motif d'absence.</div>
+                    </div>
+                </div>
+              </div>
+
+              <!-- Téléphone Field -->
+              <div class="row mb-3">
+                <label for="TelAbsence" class="col-sm-2 col-form-label">Téléphone</label>
+                <div class="col-sm-10">
+                    <div class="input-group has-validation">
+                        <input type="tel" class="form-control" name="TelAbsence" required>
+                        <div class="invalid-feedback">Veuillez fournir un numéro de téléphone.</div>
+                    </div>
+                </div>
+              </div>
+
+              <!-- Email Field -->
+              <div class="row mb-3">
+                <label for="MailAbsence" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    <div class="input-group has-validation">
+                        <input type="email" class="form-control" name="MailAbsence" required>
+                        <div class="invalid-feedback">Veuillez fournir une adresse email valide.</div>
+                    </div>
+                </div>
+              </div>
+
+              <!-- Type D'absence Field -->
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Type D'absence</label>
+                <div class="col-sm-10">
+                    <div class="input-group has-validation">
+                        <select class="form-select" aria-label="Default select example" name="DescriptionAbsence" required>
+                            <option value="" selected disabled>Séléctionner votre type D'absence</option>
+                            {% for type in all_types %}
+                                <option value="{{ type.IdTypeAbsence }}">{{ type.DescriptionAbsence }}</option>
+                            {% empty %}
+                                <option disabled>Aucun type disponible</option>
+                            {% endfor %}
+                        </select>
+                        <div class="invalid-feedback">Veuillez sélectionner un type d'absence.</div>
+                    </div>
+                </div>
+              </div>
+
+              <!-- Pièce jointe Field -->
+              <div class="row mb-3">
+                <label for="PJDemandeAbsence" class="col-sm-2 col-form-label">Pièce jointe</label>
+                <div class="col-sm-10">
+                    <div class="input-group has-validation">
+                        <input class="form-control" type="file" id="formFile" name="PJDemandeAbsence" required accept=".pdf, .png, .jpg, .jpeg, .gif" onchange="validateFileInput(this)">
+                        <div class="invalid-feedback">Veuillez fournir une pièce jointe.</div>
+                    </div>
+                </div>
+              </div>
+
+              <div class="text-center">
+                <button type="submit" class="btn">Demander</button>
+              </div>
+            
+
+
+            </form><!-- End General Form Elements -->
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+</main><!-- End #main -->
+<script>
+
+  function validateFileInput(input) {
+    const allowedExtensions = ['pdf', 'png', 'jpg', 'jpeg', 'gif'];
+    const file = input.files[0];
+    const fileExtension = file.name.split('.').pop().toLowerCase();
+    const fileSizeInMB = file.size / (1024 * 1024);
+    const maxFileSizeInMB = 2;  // Adjust the maximum file size as necessary
+
+    if (!allowedExtensions.includes(fileExtension)) {
+        input.setCustomValidity('Type de fichier non valide. Seuls les fichiers PDF et image sont autorisés.');
+        input.reportValidity();
+    } else if (fileSizeInMB > maxFileSizeInMB) {
+        input.setCustomValidity('La taille du fichier dépasse la limite autorisée de ' + maxFileSizeInMB + ' MB.');
+        input.reportValidity();
+    } else {
+        input.setCustomValidity('');
+    }
+}
+
+  // Existing script you provided
+  function adjustDateFin() {
+      const dateDebut = document.getElementById("DateDebut").value;
+      const dateFin = document.getElementById("DateFin");
+
+      dateFin.min = dateDebut;
+      if (dateFin.value < dateDebut || !dateFin.value) {
+          dateFin.value = dateDebut;
+      }
+  }
+</script>
+
+<script>
+  (function () {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.from(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+</script>
+
+{% endblock %}

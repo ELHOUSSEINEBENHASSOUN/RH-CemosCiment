@@ -1,0 +1,235 @@
+{% extends "layouts/master.html" %}
+{% block title %} Utilisateurs {% endblock %}
+{% block body %}
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Utilisateurs</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Accueille</a></li>
+          <li class="breadcrumb-item active">Utilisateurs</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+      <section class="section">
+        <div class="row">
+          <div class="col-lg-12">
+  
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Tous les utilisateurs</h5>
+                      <!-- Large Modal -->
+                      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#largeModal">
+                        <i class="bi bi-person-plus-fill"></i>
+                      </button>
+                      <div class="modal fade" id="largeModal" tabindex="-1">
+                        <div class="modal-dialog modal-lg">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title">Ajouter Utilisateur</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              
+                                        <!-- General Form Elements -->
+                              <form>
+
+                                <div class="row mb-3">
+                                  <label for="inputNumber" class="col-sm-2 col-form-label">Photo</label>
+                                  <div class="col-sm-10">
+                                    <input class="form-control" type="file" id="formFile">
+                                  </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                  <label for="inputText" class="col-sm-2 col-form-label">CIN</label>
+                                  <div class="col-sm-10">
+                                    <input type="text" class="form-control">
+                                  </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                  <label for="inputText" class="col-sm-2 col-form-label">Nom</label>
+                                  <div class="col-sm-10">
+                                    <input type="text" class="form-control">
+                                  </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                  <label for="inputText" class="col-sm-2 col-form-label">Prenom</label>
+                                  <div class="col-sm-10">
+                                    <input type="text" class="form-control">
+                                  </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                  <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                                  <div class="col-sm-10">
+                                    <input type="email" class="form-control">
+                                  </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                  <label for="inputText" class="col-sm-2 col-form-label">Téléphone</label>
+                                  <div class="col-sm-10">
+                                    <input type="text" class="form-control">
+                                  </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                  <label for="inputText" class="col-sm-2 col-form-label">Lieux de naissance</label>
+                                  <div class="col-sm-10">
+                                    <input type="text" class="form-control">
+                                  </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                  <label for="inputDate" class="col-sm-2 col-form-label">Date de naissance</label>
+                                  <div class="col-sm-10">
+                                    <input type="date" class="form-control">
+                                  </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                  <label for="inputPassword" class="col-sm-2 col-form-label">Adresse</label>
+                                  <div class="col-sm-10">
+                                    <textarea class="form-control" style="height: 100px"></textarea>
+                                  </div>
+                                </div>
+
+                                <fieldset class="row mb-3">
+                                  <legend class="col-form-label col-sm-2 pt-0">Genre</legend>
+                                  <div class="col-sm-10">
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                                      <label class="form-check-label" for="gridRadios1">
+                                        Homme
+                                      </label>
+                                    </div>
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                                      <label class="form-check-label" for="gridRadios2">
+                                        Femme
+                                      </label>
+                                    </div>
+                                  </div>
+                                </fieldset>
+                                
+                                <fieldset class="row mb-3">
+                                  <legend class="col-form-label col-sm-2 pt-0">Situation familiale</legend>
+                                  <div class="col-sm-10">
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                                      <label class="form-check-label" for="gridRadios1">
+                                        Célibataire
+                                      </label>
+                                    </div>
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                                      <label class="form-check-label" for="gridRadios2">
+                                        Marié(e)
+                                      </label>
+                                    </div>
+                                  </div>
+                                </fieldset>
+      
+                                <div class="row mb-3">
+                                  <label class="col-sm-2 col-form-label">Société</label>
+                                  <div class="col-sm-10">
+                                    <select class="form-select" aria-label="Default select example">
+                                      <option selected>Open this select menu</option>
+                                      <option value="1">One</option>
+                                      <option value="2">Two</option>
+                                      <option value="3">Three</option>
+                                    </select>
+                                  </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                  <label class="col-sm-2 col-form-label">Poste</label>
+                                  <div class="col-sm-10">
+                                    <select class="form-select" aria-label="Default select example">
+                                      <option selected>Open this select menu</option>
+                                      <option value="1">One</option>
+                                      <option value="2">Two</option>
+                                      <option value="3">Three</option>
+                                    </select>
+                                  </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                  <label class="col-sm-2 col-form-label">Role</label>
+                                  <div class="col-sm-10">
+                                    <select class="form-select" aria-label="Default select example">
+                                      <option selected>Open this select menu</option>
+                                      <option value="1">One</option>
+                                      <option value="2">Two</option>
+                                      <option value="3">Three</option>
+                                    </select>
+                                  </div>
+                                </div>
+
+                                
+                              </form><!-- End General Form Elements -->
+      
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn" data-bs-dismiss="modal">Annuler</button>
+                              <button type="button" class="btn">Ajouter</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- End Vertically centered Modal-->
+
+
+                      <!-- Table with stripped rows -->
+                      <div class="table-responsive">
+                        <table id="example" class="display" style="width:100%">
+                          <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Nom</th>
+                              <th scope="col">Prénom</th>
+                              <th scope="col">Matricule</th>
+                              <th scope="col">Poste</th>
+                              <th scope="col">Status</th>
+                              <th scope="col">Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for person in personnelles %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td>{{ person.Nom|upper }}</td>
+                                <td>{{ person.Prenom|upper }}</td>
+                                <td>{{ person.Matricule }}</td>
+                                <td>{{ person.IdPoste.DescriptionPoste }}</td>
+                                {% if person.Statut == 'Actif' %} 
+                                <td><span class="badge green-badge-color">{{ person.Statut }}</span></td>
+                                {% else %}
+                                <td><span class="badge red-badge-color">{{ person.Statut }}</span></td>
+                                {% endif %}
+                                <td>
+                                  <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="activateSwitch1">
+                                    <label class="form-check-label" for="activateSwitch1">Activer/Désactiver</label>
+                                  </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                          </tbody>
+                        
+                        </table>
+                      </div>
+                      <!-- End Table with stripped rows -->
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </section>
+  </main><!-- End #main -->
+{% endblock %}
